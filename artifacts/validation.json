@@ -1,12 +1,11 @@
 {
-  "checked_at": "2026-11-15T11:41:26.621870+00:00",
+  "checked_at": "2026-11-15T12:37:52.627592+00:00",
   "state": "incomplete local component",
-  "tests": "17 distinct unittest checks passed (10 text/review, 7 file lifecycle/security)",
+  "tests": "25 distinct unittest checks passed, including 8 Flask HTTP integration tests",
   "pending": [
-    "HTTP upload/download endpoints and bounded request parsing",
-    "Owner authentication",
-    "Web UI",
+    "Polished web UI",
     "Six locales",
-    "Browser and deployment acceptance"
+    "Real browser acceptance",
+    "Production deployment instructions and acceptance"
   ]
 }

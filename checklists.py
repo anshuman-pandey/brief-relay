@@ -33,7 +33,11 @@ class Checklists:
   if row is None or not isinstance(token,str) or not hmac.compare_digest(row['token_hash'],digest(token)):raise RequestError('Request access denied.')
   return row
  def view(self,key,token):
-  row=self.authenticate(key,token)
+  self.authenticate(key,token)
+  return self.owner_view(key)
+ def owner_view(self,key):
+  row=self.db.execute("SELECT * FROM requests WHERE id=?",(key,)).fetchone()
+  if row is None:raise RequestError("Request not found.")
   items=[]
   for item in self.db.execute('SELECT * FROM items WHERE request_id=? ORDER BY rowid',(key,)):
    version=self.db.execute('SELECT body FROM versions WHERE item_id=? AND revision=?',(item['id'],item['revision'])).fetchone()
@@ -52,6 +56,8 @@ class Checklists:
   return dict(row) if row else None
  def download(self,key,token,item_id,revision):
   self.authenticate(key,token)
+  return self.owner_download(key,item_id,revision)
+ def owner_download(self,key,item_id,revision):
   if type(revision) is not int or revision<1:raise RequestError('Invalid revision.')
   row=self.db.execute('SELECT a.filename,a.data,a.sha256 FROM attachments a JOIN items i ON i.id=a.item_id WHERE i.request_id=? AND a.item_id=? AND a.revision=?',(key,item_id,revision)).fetchone()
   if row is None:raise RequestError('Attachment not found.')
@@ -75,6 +81,7 @@ class Checklists:
    self.db.execute("UPDATE items SET revision=?,state='submitted' WHERE id=?",(revision,item_id))
   return revision
  def review(self,key,item_id,revision,decision,note=''):
+  text(item_id,100)
   if decision not in ('approved','changes_requested'):raise RequestError('Invalid decision.')
   if decision=='changes_requested':text(note,2000)
   elif not isinstance(note,str) or len(note)>2000:raise RequestError('Invalid review note.')
@@ -96,7 +103,10 @@ class Checklists:
   with self.db:
    if not self.db.execute('UPDATE requests SET closed=? WHERE id=?',(int(closed),key)).rowcount:raise RequestError('Request not found.')
  def export(self,key,token):
-  result=self.view(key,token)
+  self.authenticate(key,token)
+  return self.owner_export(key)
+ def owner_export(self,key):
+  result=self.owner_view(key)
   for item in result['items']:
    item['history']=[dict(r) for r in self.db.execute('SELECT revision,body,created_at FROM versions WHERE item_id=? ORDER BY revision',(item['id'],))]
    for version in item['history']:version['attachment']=self._metadata(item['id'],version['revision'])
