@@ -1,20 +1,42 @@
-# Brief Relay · development component
+<p align="center">
+  <img src="docs/assets/hero.svg" alt="Brief Relay — get the brief, keep the approval. Collect, review, and approve client responses." width="100%">
+</p>
 
-A focused open-source Content Snare alternative in preparation. **Not a finished or published product.**
+<p align="center">
+  <a href="https://github.com/anshuman-pandey/brief-relay/actions/workflows/check.yml"><img src="https://github.com/anshuman-pandey/brief-relay/actions/workflows/check.yml/badge.svg" alt="Core checks"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-d8f17a?labelColor=102a2a" alt="MIT license"></a>
+  <img src="https://img.shields.io/badge/status-API_preview-d8f17a?labelColor=102a2a" alt="API preview">
+</p>
 
-Current component: client checklists with revocable access tokens, versioned text answers and file attachments, owner approval/change requests, closed requests and JSON history export. Approved answers cannot be silently replaced, and stale reviews cannot approve newer content.
+<p align="center"><strong>Open-source client intake and approvals. A focused alternative to Content Snare workflows.</strong><br>Collect text and files, request changes, and approve the exact revision you reviewed.</p>
 
-Run `python3 -m unittest discover -s tests -v` with Python 3.10+. Install HTTP dependencies with `pip install -r requirements.txt`. The `Checklists` API stores a SQLite library. Tokens are returned at creation/rotation, stored only as hashes and excluded from export. Owner methods currently rely on their caller for authorization: do not expose the library directly over HTTP.
+<p align="center"><a href="#quick-start">Run locally</a> · <a href="docs/API.md">API guide</a> · <a href="#what-works-today">What works</a> · <a href="docs/SCOPE.md">Scope &amp; comparison</a></p>
 
-Still required: a polished client/owner web UI, six languages, browser acceptance, deployment instructions, visual README and launch handoff. No reminders, email delivery, full Content Snare parity or compliance certification claimed.
+> **Public development preview.** The authenticated API runs locally today. A browser interface, six-language support, and browser acceptance are still in development. The graphic above illustrates the implemented workflow; it is not an app screenshot.
 
-MIT licensed. See [scope](docs/SCOPE.md).
+## Stop losing the latest version
 
-Attachments are stored atomically in SQLite: 10 MiB per file and 100 MiB per request including immutable history. Plain filenames only; no disk paths or active previews. `download` checks the current client token and request membership for every revision. JSON exports include filename/size/SHA-256 metadata; binary files are retrieved separately. The HTTP layer bounds request and file reads and forces attachment downloads with `application/octet-stream` and `nosniff`. This library does not scan files for malware.
+A client sends a logo. You ask for a change. They replace the file. Which version did you approve?
 
-## Run the development API
+Brief Relay keeps each response as an immutable revision. An approval belongs to that revision. Approved items stay locked until the owner requests changes, and an outdated review cannot approve a newer submission.
+
+## What works today
+
+| Collect | Review | Keep control |
+| :--- | :--- | :--- |
+| Create a checklist of up to 50 items | Approve an exact response revision | Revoke a client key immediately |
+| Receive text or file responses | Request changes with a note | Close a request to submissions |
+| Preserve previous submissions | Reject stale edits and approvals | Export JSON history and download files |
+
+Files live in SQLite alongside their revisions: **10 MiB per file**, **100 MiB per request including history**. Downloads require access to the matching request. JSON exports contain file metadata; file bytes are downloaded separately.
+
+## Quick start
+
+Requires Python 3.10+.
 
 ```sh
+git clone https://github.com/anshuman-pandey/brief-relay.git
+cd brief-relay
 python3 -m venv .venv
 . .venv/bin/activate
 pip install -r requirements.txt
@@ -22,6 +44,43 @@ export BRIEF_OWNER_KEY="$(python3 -c 'import secrets; print(secrets.token_urlsaf
 python server.py
 ```
 
-List/create requests at `/api/owner/requests` with `Authorization: Bearer <owner key>`; creation JSON is `{"title":"Website brief","labels":["Brand assets"]}`. Creation returns a request ID and client token. Clients use their token at `/api/requests/<id>` and submit text via `/items/<item>` (JSON `revision`, `body`) or files via `/items/<item>/file` (multipart `revision`, `file`). Owner review uses `/api/owner/requests/<id>/review` with `item_id`, `revision`, `decision`, `note`. Decisions are `approved` or `changes_requested`. `/rotate` revokes the old client token; `/closed` accepts JSON `closed`; `/export` returns JSON revision history.
+The API listens at **`http://127.0.0.1:8090`**. Keep the owner key available in a second terminal to create your first request:
 
-The server binds only to 127.0.0.1:8090. This is a runnable API, **not a finished browser application or production deployment**. Keep credentials out of URLs and logs. Owner credentials grant access to all requests. No cookie authentication or cross-origin API access is enabled. Restarting with a different owner key invalidates the old owner key; client keys remain in the database. Back up the SQLite database before upgrades. Do not expose Flask's development server publicly.
+```sh
+curl http://127.0.0.1:8090/api/owner/requests \
+  -H "Authorization: Bearer $BRIEF_OWNER_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"title":"Website brief","labels":["Brand assets","Who is your audience?"]}'
+```
+
+The response contains a request `id` and client `token`. Use the client token to submit responses; use the owner key to review them. **[Continue with the API guide →](docs/API.md)**
+
+## Where it fits
+
+Brief Relay is for developers and small agencies who want to own a focused client collection and approval workflow.
+
+| Workflow | Brief Relay today |
+| :--- | :--- |
+| Content Snare-style client checklists, files, and approval | Implemented through the API |
+| Self-hosted storage and portable records | SQLite, JSON history, separate file downloads |
+| Visual owner/client workspace | Planned; not yet available |
+| Automated email reminders and team collaboration | Not implemented |
+| Complete Content Snare feature parity | Not claimed |
+
+See the [scope and vendor reference](docs/SCOPE.md) for the exact comparison boundary.
+
+## Development
+
+```sh
+python -m unittest discover -s tests -v
+```
+
+The current suite has **25 tests**, covering revision conflicts, file persistence, access isolation, token revocation, storage limits, and the HTTP approval flow. GitHub Actions runs the suite on each push and pull request.
+
+Next milestones: a polished owner/client UI, six languages, and real browser workflow tests. Contributions should include a reproducible use case and relevant tests. Report bugs through [GitHub Issues](https://github.com/anshuman-pandey/brief-relay/issues).
+
+## Operating boundaries
+
+The included server is for local development, not public production hosting. Keep credentials out of URLs and logs; the owner key grants access to every request. Files are downloaded as attachments and are not scanned for malware. Back up the SQLite database before upgrades. See [API and storage notes](docs/API.md#storage-and-access).
+
+[MIT licensed](LICENSE). Your storage. Your client records. Your review trail.
