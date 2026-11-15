@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="580" viewBox="0 0 1280 580" role="img" aria-labelledby="title desc">
+<title id="title">Brief Relay — a clear path from client request to approval</title><desc id="desc">Workflow diagram: collect a brief, review each revision, approve the exact response. Open source client intake API.</desc>
+<rect width="1280" height="580" rx="24" fill="#102a2a"/>
+<path d="M880 0v580M1040 0v580M1200 0v580M0 500h1280" stroke="#214040"/>
+<circle cx="1170" cy="104" r="180" fill="none" stroke="#2c5050" stroke-width="2"/>
+<g font-family="Arial,Helvetica,sans-serif">
+<rect x="64" y="52" width="40" height="40" rx="10" fill="#d8f17a"/><path d="M75 72h18m-7-7 7 7-7 7" fill="none" stroke="#102a2a" stroke-width="3"/>
+<text x="120" y="81" font-size="25" font-weight="700" fill="#f1f4e9">BRIEF RELAY</text>
+<text x="64" y="185" font-size="63" font-weight="700" letter-spacing="-2" fill="#f1f4e9">Get the brief.</text>
+<text x="64" y="254" font-size="63" font-weight="700" letter-spacing="-2" fill="#d8f17a">Keep the approval.</text>
+<text x="66" y="303" font-size="22" fill="#b7c9c3">Client checklists, versioned files, and a clear review trail.</text>
+<text x="66" y="341" font-size="17" fill="#b7c9c3">Open-source alternative to Content Snare workflows</text>
+<g transform="translate(64 392)">
+<rect width="350" height="108" rx="12" fill="#f1f4e9"/><text x="22" y="34" font-size="13" font-weight="700" fill="#56736a">01 / COLLECT</text><text x="22" y="66" font-size="22" font-weight="700" fill="#102a2a">A checklist. A client key.</text><text x="22" y="89" font-size="14" fill="#476158">Text answers + file attachments</text>
+<rect x="372" width="350" height="108" rx="12" fill="#f1f4e9"/><text x="394" y="34" font-size="13" font-weight="700" fill="#56736a">02 / REVIEW</text><text x="394" y="66" font-size="22" font-weight="700" fill="#102a2a">Make the next revision clear.</text><text x="394" y="89" font-size="14" fill="#476158">Request changes with a review note</text>
+<rect x="744" width="344" height="108" rx="12" fill="#d8f17a"/><text x="766" y="34" font-size="13" font-weight="700" fill="#476158">03 / APPROVE</text><text x="766" y="66" font-size="22" font-weight="700" fill="#102a2a">Sign off on that version.</text><text x="766" y="89" font-size="14" fill="#476158">Preserve history. Export the record.</text>
+</g>
+<text x="66" y="545" font-size="13" letter-spacing="1" fill="#b7c9c3">MIT LICENSE   /   PYTHON + SQLITE   /   SELF-HOSTED API</text>
+<text x="974" y="545" font-size="13" fill="#b7c9c3">WORKFLOW DIAGRAM · API PREVIEW</text>
+</g></svg>
