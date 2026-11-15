@@ -1,9 +1,9 @@
 {
-  "checked_at": "2026-11-15T10:36:53.511755+00:00",
+  "checked_at": "2026-11-15T11:41:26.621870+00:00",
   "state": "incomplete local component",
-  "tests": "10 unittest checks passed",
+  "tests": "17 distinct unittest checks passed (10 text/review, 7 file lifecycle/security)",
   "pending": [
-    "Files",
+    "HTTP upload/download endpoints and bounded request parsing",
     "Owner authentication",
     "Web UI",
     "Six locales",
