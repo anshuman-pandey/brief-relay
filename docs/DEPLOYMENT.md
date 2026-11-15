@@ -1,6 +1,6 @@
 # Persistent server setup
 
-This recipe runs Brief Relay on your own machine with a persistent SQLite volume. Container persistence and restore are tested; a public HTTPS deployment has **not** been verified. Six-language support is also still pending.
+This recipe runs Brief Relay on your own machine with a persistent SQLite volume. Container persistence and restore are tested; a public HTTPS deployment has **not** been verified. The six-language interface is implemented; native-speaker review is pending.
 
 ## Docker Compose
 

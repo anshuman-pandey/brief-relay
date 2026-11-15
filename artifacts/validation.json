@@ -1,12 +1,12 @@
 {
-  "checked_at": "2026-11-15T14:43:47.077864+00:00",
-  "state": "local English workspace preview",
-  "tests": "28 Python tests passed",
+  "checked_at": "2026-11-15T15:39:23.254583+00:00",
+  "state": "six-language local workspace preview",
+  "tests": "29 Python tests passed",
   "pending": [
-    "Six locales",
     "Public HTTPS deployment acceptance",
     "Native-language review"
   ],
   "browser": "Chromium: owner/client text, changes requested, file revision, approval, JSON export, key revocation; desktop/mobile inspected; no horizontal overflow",
-  "container": "Non-root read-only app, binary upload, approval, restart, private SQLite backup, clean-volume restore and post-restore write passed"
+  "container": "Non-root read-only app, binary upload, approval, restart, private SQLite backup, clean-volume restore and post-restore write passed",
+  "locales": "All six locale catalogs pass parameter checks. Chromium checks regional detection, saved preferences, blocked storage, owner/client drafts, selected files, safe content, translated access error and mobile overflow; Japanese mobile screenshot inspected."
 }
