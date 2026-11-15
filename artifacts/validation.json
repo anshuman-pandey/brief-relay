@@ -1,6 +1,6 @@
 {
   "checked_at": "2026-11-15T15:39:23.254583+00:00",
-  "state": "local English workspace preview",
+  "state": "six-language local workspace preview",
   "tests": "29 Python tests passed",
   "pending": [
     "Public HTTPS deployment acceptance",
