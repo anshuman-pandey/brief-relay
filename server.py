@@ -42,7 +42,7 @@ def create_app(database,owner_key):
         response.headers['Cache-Control']='no-store'
         response.headers['X-Content-Type-Options']='nosniff'
         response.headers['Referrer-Policy']='no-referrer'
-        response.headers['Content-Security-Policy']="default-src 'none'; frame-ancestors 'none'"
+        response.headers['Content-Security-Policy']="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"
         return response
 
     @app.errorhandler(RequestError)
@@ -50,6 +50,9 @@ def create_app(database,owner_key):
 
     @app.errorhandler(HTTPException)
     def http_error(error):return jsonify(error=error.description),error.code
+
+    @app.get('/')
+    def workspace():return app.send_static_file('index.html')
 
     @app.get('/api/owner/requests')
     @owner
