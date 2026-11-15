@@ -5,14 +5,14 @@
 <p align="center">
   <a href="https://github.com/anshuman-pandey/brief-relay/actions/workflows/check.yml"><img src="https://github.com/anshuman-pandey/brief-relay/actions/workflows/check.yml/badge.svg" alt="Core checks"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-d8f17a?labelColor=102a2a" alt="MIT license"></a>
-  <img src="https://img.shields.io/badge/status-API_preview-d8f17a?labelColor=102a2a" alt="API preview">
+  <img src="https://img.shields.io/badge/status-local_preview-d8f17a?labelColor=102a2a" alt="Local preview">
 </p>
 
 <p align="center"><strong>Open-source client intake and approvals. A focused alternative to Content Snare workflows.</strong><br>Collect text and files, request changes, and approve the exact revision you reviewed.</p>
 
 <p align="center"><a href="#quick-start">Run locally</a> · <a href="docs/API.md">API guide</a> · <a href="#what-works-today">What works</a> · <a href="docs/SCOPE.md">Scope &amp; comparison</a></p>
 
-> **Public development preview.** The authenticated API runs locally today. A browser interface, six-language support, and browser acceptance are still in development. The graphic above illustrates the implemented workflow; it is not an app screenshot.
+> **Public development preview.** The owner/client browser workspace and authenticated API run locally today. Six-language support and production deployment acceptance remain in development. The graphic above illustrates the implemented workflow; it is not an app screenshot.
 
 ## Stop losing the latest version
 
@@ -44,7 +44,7 @@ export BRIEF_OWNER_KEY="$(python3 -c 'import secrets; print(secrets.token_urlsaf
 python server.py
 ```
 
-The API listens at **`http://127.0.0.1:8090`**. Keep the owner key available in a second terminal to create your first request:
+Open **`http://127.0.0.1:8090`** and enter the owner key to create a checklist, review submissions, and export history. Client access details appear when a request is created. Keep the owner key available in a second terminal if you prefer the API:
 
 ```sh
 curl http://127.0.0.1:8090/api/owner/requests \
@@ -63,7 +63,7 @@ Brief Relay is for developers and small agencies who want to own a focused clien
 | :--- | :--- |
 | Content Snare-style client checklists, files, and approval | Implemented through the API |
 | Self-hosted storage and portable records | SQLite, JSON history, separate file downloads |
-| Visual owner/client workspace | Planned; not yet available |
+| Visual owner/client workspace | English local preview; tested in Chromium |
 | Automated email reminders and team collaboration | Not implemented |
 | Complete Content Snare feature parity | Not claimed |
 
@@ -77,10 +77,16 @@ python -m unittest discover -s tests -v
 
 The current suite has **25 tests**, covering revision conflicts, file persistence, access isolation, token revocation, storage limits, and the HTTP approval flow. GitHub Actions runs the suite on each push and pull request.
 
-Next milestones: a polished owner/client UI, six languages, and real browser workflow tests. Contributions should include a reproducible use case and relevant tests. Report bugs through [GitHub Issues](https://github.com/anshuman-pandey/brief-relay/issues).
+Next milestones: six languages and production deployment acceptance. The Chromium browser test covers owner/client text submission, requested changes, file resubmission, approval, JSON export, revocation, and mobile overflow. Contributions should include a reproducible use case and relevant tests. Report bugs through [GitHub Issues](https://github.com/anshuman-pandey/brief-relay/issues).
 
 ## Operating boundaries
 
 The included server is for local development, not public production hosting. Keep credentials out of URLs and logs; the owner key grants access to every request. Files are downloaded as attachments and are not scanned for malware. Back up the SQLite database before upgrades. See [API and storage notes](docs/API.md#storage-and-access).
 
 [MIT licensed](LICENSE). Your storage. Your client records. Your review trail.
+
+## Workspace preview
+
+![Actual local owner workspace with an approved file revision](docs/assets/workspace.png)
+
+Captured from the working local application with synthetic example data. Client URLs shown by the local preview work on the same machine only.

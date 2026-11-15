@@ -7,3 +7,11 @@ The server binds only to 127.0.0.1:8090. This is a runnable API, **not a finishe
 ## Storage and access
 
 SQLite stores immutable text and file revisions. Limits: 10 MiB per file, 100 MiB per request including history. JSON history exports contain file metadata, not binary content. Client tokens are stored as hashes and may be revoked with rotation. Owner methods in the Python library assume their caller has authenticated; the HTTP routes enforce owner bearer authentication.
+
+## Browser workspace
+
+Open `/` for the owner workspace. Client mode is `/?client=1`; clients enter their request ID and key separately. Credentials are held in memory, not localStorage or URLs. Reload or Lock workspace clears access. The owner key is the value set in `BRIEF_OWNER_KEY`. Client keys are displayed only on creation or rotation; save the handoff before reloading. Replacing a client key revokes the old one immediately. A file chosen with a text response takes precedence and is submitted as a file revision.
+
+## Browser acceptance
+
+Install Playwright in an external test environment (`npm install playwright`) and provide its module directory through `NODE_PATH` if necessary. Start the server using a disposable database and test-only owner key. Run `BRIEF_OWNER_KEY=<test key> node scripts/browser.cjs`; optionally set `BRIEF_URL` and `CHROMIUM`. The test creates synthetic requests and exports and must not run against production data.
