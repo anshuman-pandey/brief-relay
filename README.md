@@ -12,7 +12,7 @@
 
 <p align="center"><a href="#quick-start">Run locally</a> · <a href="docs/API.md">API guide</a> · <a href="#what-works-today">What works</a> · <a href="docs/SCOPE.md">Scope &amp; comparison</a></p>
 
-> **Public development preview.** The owner/client browser workspace and authenticated API run locally today. Six-language support and production deployment acceptance remain in development. The graphic above illustrates the implemented workflow; it is not an app screenshot.
+> **Public development preview.** The owner/client browser workspace and authenticated API run locally today. The interface supports English, German, Spanish, Japanese, Simplified Chinese, and Traditional Chinese. Public HTTPS deployment acceptance and native-speaker review remain pending. The graphic above illustrates the implemented workflow; it is not an app screenshot.
 
 ## Stop losing the latest version
 
@@ -55,6 +55,12 @@ curl http://127.0.0.1:8090/api/owner/requests \
 
 The response contains a request `id` and client `token`. Use the client token to submit responses; use the owner key to review them. **[Continue with the API guide →](docs/API.md)**
 
+## Use your language
+
+Choose **English · Deutsch · Español · 日本語 · 简体中文 · 繁體中文** in the header. Brief Relay starts with a supported browser language and remembers your choice when browser storage is available. Switching languages preserves text drafts and selected files. Project titles, responses, filenames, and review notes stay exactly as entered. No translation service is contacted.
+
+Interface and application errors are translated; unexpected framework/network diagnostics may fall back to English. Native-speaker review is welcome.
+
 ## Keep your data across restarts
 
 ```sh
@@ -84,9 +90,9 @@ See the [scope and vendor reference](docs/SCOPE.md) for the exact comparison bou
 python -m unittest discover -s tests -v
 ```
 
-The current suite has **28 tests**, covering revision conflicts, file persistence, access isolation, token revocation, storage limits, and the HTTP approval flow. GitHub Actions runs the suite on each push and pull request.
+The current suite has **29 tests**, covering revision conflicts, file persistence, access isolation, token revocation, storage limits, and the HTTP approval flow. GitHub Actions runs the suite on each push and pull request.
 
-Next milestones: six languages and public HTTPS deployment acceptance. Persistent container restart and backup/restore are tested. The Chromium browser test covers owner/client text submission, requested changes, file resubmission, approval, JSON export, revocation, and mobile overflow. Contributions should include a reproducible use case and relevant tests. Report bugs through [GitHub Issues](https://github.com/anshuman-pandey/brief-relay/issues).
+Next milestones: native-speaker review and public HTTPS deployment acceptance. Persistent container restart and backup/restore are tested. The Chromium browser test covers owner/client text submission, requested changes, file resubmission, approval, JSON export, revocation, and mobile overflow. Contributions should include a reproducible use case and relevant tests. Report bugs through [GitHub Issues](https://github.com/anshuman-pandey/brief-relay/issues).
 
 ## Operating boundaries
 
