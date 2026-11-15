@@ -55,6 +55,15 @@ curl http://127.0.0.1:8090/api/owner/requests \
 
 The response contains a request `id` and client `token`. Use the client token to submit responses; use the owner key to review them. **[Continue with the API guide →](docs/API.md)**
 
+## Keep your data across restarts
+
+```sh
+python3 scripts/setup.py
+docker compose up -d --build
+```
+
+This creates a private owner key in `.env` and stores client records in a named volume. The service stays on localhost. **[Persistent setup, backup, and restore →](docs/DEPLOYMENT.md)**
+
 ## Where it fits
 
 Brief Relay is for developers and small agencies who want to own a focused client collection and approval workflow.
@@ -75,13 +84,13 @@ See the [scope and vendor reference](docs/SCOPE.md) for the exact comparison bou
 python -m unittest discover -s tests -v
 ```
 
-The current suite has **25 tests**, covering revision conflicts, file persistence, access isolation, token revocation, storage limits, and the HTTP approval flow. GitHub Actions runs the suite on each push and pull request.
+The current suite has **28 tests**, covering revision conflicts, file persistence, access isolation, token revocation, storage limits, and the HTTP approval flow. GitHub Actions runs the suite on each push and pull request.
 
-Next milestones: six languages and production deployment acceptance. The Chromium browser test covers owner/client text submission, requested changes, file resubmission, approval, JSON export, revocation, and mobile overflow. Contributions should include a reproducible use case and relevant tests. Report bugs through [GitHub Issues](https://github.com/anshuman-pandey/brief-relay/issues).
+Next milestones: six languages and public HTTPS deployment acceptance. Persistent container restart and backup/restore are tested. The Chromium browser test covers owner/client text submission, requested changes, file resubmission, approval, JSON export, revocation, and mobile overflow. Contributions should include a reproducible use case and relevant tests. Report bugs through [GitHub Issues](https://github.com/anshuman-pandey/brief-relay/issues).
 
 ## Operating boundaries
 
-The included server is for local development, not public production hosting. Keep credentials out of URLs and logs; the owner key grants access to every request. Files are downloaded as attachments and are not scanned for malware. Back up the SQLite database before upgrades. See [API and storage notes](docs/API.md#storage-and-access).
+`server.py` is for local development. For a persistent WSGI server, non-root Docker setup, and backup/restore instructions, see the [deployment guide](docs/DEPLOYMENT.md). Public HTTPS deployment remains unverified. Keep credentials out of URLs and logs; the owner key grants access to every request. Files are downloaded as attachments and are not scanned for malware. Back up the SQLite database before upgrades. See [API and storage notes](docs/API.md#storage-and-access).
 
 [MIT licensed](LICENSE). Your storage. Your client records. Your review trail.
 

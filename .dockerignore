@@ -1,0 +1,7 @@
+*
+!requirements.txt
+!checklists.py
+!server.py
+!serve.py
+!static
+!static/**

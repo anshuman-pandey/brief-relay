@@ -1,11 +1,12 @@
 {
-  "checked_at": "2026-11-15T13:39:15.164441+00:00",
+  "checked_at": "2026-11-15T14:43:47.077864+00:00",
   "state": "local English workspace preview",
-  "tests": "25 distinct unittest checks passed, including 8 Flask HTTP integration tests",
+  "tests": "28 Python tests passed",
   "pending": [
     "Six locales",
-    "Production deployment instructions and acceptance",
+    "Public HTTPS deployment acceptance",
     "Native-language review"
   ],
-  "browser": "Chromium: owner/client text, changes requested, file revision, approval, JSON export, key revocation; desktop/mobile inspected; no horizontal overflow"
+  "browser": "Chromium: owner/client text, changes requested, file revision, approval, JSON export, key revocation; desktop/mobile inspected; no horizontal overflow",
+  "container": "Non-root read-only app, binary upload, approval, restart, private SQLite backup, clean-volume restore and post-restore write passed"
 }
