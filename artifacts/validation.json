@@ -1,0 +1,12 @@
+{
+  "checked_at": "2026-11-15T10:36:53.511755+00:00",
+  "state": "incomplete local component",
+  "tests": "10 unittest checks passed",
+  "pending": [
+    "Files",
+    "Owner authentication",
+    "Web UI",
+    "Six locales",
+    "Browser and deployment acceptance"
+  ]
+}
