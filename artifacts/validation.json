@@ -8,5 +8,28 @@
   ],
   "browser": "Chromium: owner/client text, changes requested, file revision, approval, JSON export, key revocation; desktop/mobile inspected; no horizontal overflow",
   "container": "Non-root read-only app, binary upload, approval, restart, private SQLite backup, clean-volume restore and post-restore write passed",
-  "locales": "All six locale catalogs pass parameter checks. Chromium checks regional detection, saved preferences, blocked storage, owner/client drafts, selected files, safe content, translated access error and mobile overflow; Japanese mobile screenshot inspected."
+  "locales": "All six locale catalogs pass parameter checks. Chromium checks regional detection, saved preferences, blocked storage, owner/client drafts, selected files, safe content, translated access error and mobile overflow; Japanese mobile screenshot inspected.",
+  "current_audit": {
+    "checked_at": "2026-11-26T13:36:59.571702+00:00",
+    "source_head": "f4b4a36e6c85fa963d7b24fe9d90377011233823",
+    "source_publication": "https://github.com/anshuman-pandey/brief-relay",
+    "source_public": true,
+    "ci": {
+      "conclusion": "success",
+      "headSha": "f4b4a36e6c85fa963d7b24fe9d90377011233823",
+      "status": "completed",
+      "url": "https://github.com/anshuman-pandey/brief-relay/actions/runs/43731254892"
+    },
+    "local_core_check": {
+      "exit": 0,
+      "summary": "----------------------------------------------------------------------\nRan 29 tests in 0.915s\n\nOK\n"
+    },
+    "release_urls": [],
+    "hosted_demo_url": null,
+    "remaining_gates": [
+      "Public HTTPS deployment acceptance",
+      "Native-language review"
+    ],
+    "note": "Historical validation below is retained as dated evidence. Source publication does not establish a hosted deployment."
+  }
 }
