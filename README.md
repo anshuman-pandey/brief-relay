@@ -105,3 +105,7 @@ Next milestones: native-speaker review and public HTTPS deployment acceptance. P
 ![Actual local owner workspace with an approved file revision](docs/assets/workspace.png)
 
 Captured from the working local application with synthetic example data. Client URLs shown by the local preview work on the same machine only.
+
+## Current verification
+
+See the [26 November audit checkpoint](docs/AUDIT.md) for the verified repository, release links, fresh core test result and remaining deployment/browser gates. Earlier validation records remain dated evidence.
